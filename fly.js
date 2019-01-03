@@ -23,7 +23,7 @@ const handleError = (err) => {
 //drone.send('battery?', 0, 8, PORT, HOST, handleError )
 
 const commands = ['command', 'battery?', 'takeoff', 'land']
-//const commands = ['command', 'land']    // for emergencies uncomment and run.
+//const commands = ['command', 'land']    // for emergencies uncomment and run.`
 
 let i = 0
 
