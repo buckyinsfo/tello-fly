@@ -19,26 +19,35 @@ const handleError = (err) => {
     }
 }
 
-//drone.send('command', 0, 7, PORT, HOST, handleError )
-//drone.send('battery?', 0, 8, PORT, HOST, handleError )
-
-const commands = ['command', 'battery?', 'takeoff', 'land']
-//const commands = ['command', 'land']    // for emergencies uncomment and run.`
+const commands = [
+    'command', 
+    'battery?', 
+    'takeoff', 
+    'flip b', 
+    'cw 90',
+    'flip l', 
+    'cw 90',
+    'flip f', 
+    'cw 90', 
+    'flip r',
+    'cw 90', 
+    'land',
+]
 
 let i = 0
-
 const go = async () => {
     const command = commands[i]
-    const delay = commandDelays[command]
-    console.log(`running cmmand: ${command}`)
+    const cmdRoot = command.split(' ')
+    const delay = commandDelays[cmdRoot[0]]
+
+    console.log(`running command: ${command}`)
     drone.send(command, 0, command.length, PORT, HOST, handleError)
     await wait(delay)
     i += 1
-    if (i < command.length) {
+    if (i < commands.length) {
         return go()
     }
     console.log('Done!')
 }
 
-go( )
-
+go()
